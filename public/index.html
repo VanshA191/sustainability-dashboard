@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateTrace Analytics</title>
+    
+    <!-- Fonts: Poppins for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Chart.js and Leaflet JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar glass-panel">
+            <div class="brand">
+                <img src="assets/logo.png" class="brand-logo" alt="ClimateTrace Logo" style="width: 44px; height: 44px; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.5);">
+                <h2>ClimateTrace</h2>
+            </div>
+            <div class="brand-subtitle">Global Analytics</div>
+            
+            <ul class="nav-links mt-4">
+                <li class="active"><a href="#">Executive Summary</a></li>
+                <li><a href="#decoupling">Economic Decoupling</a></li>
+                <li><a href="#trace-maps">Geospatial Tracing</a></li>
+                <li><a href="#chronological">Chronological Progression Mapping</a></li>
+                <li><a href="#predictions">Algorithmic Future Scenarios</a></li>
+                <li><a href="#diagnostic">Diagnostic Feature Correlation</a></li>
+            </ul>
+            <button id="btn-simulate" class="btn primary-btn mt-auto" style="margin-bottom: 10px;">⚡ Run Simulation</button>
+        </nav>
+
+        <main class="content">
+            <header class="topbar">
+                <h1>Global Emissions Synthesis</h1>
+                <p class="subtitle">Diagnostic Tracking & Decoupling Vector Analysis</p>
+            </header>
+
+            <!-- LIVE TICKER SECTION -->
+            <section class="live-tracker glass-panel mb-4">
+                <div class="live-header">
+                    <span class="live-dot"></span> LIVE: Estimated Global CO₂ Output
+                </div>
+                <div class="live-counter">
+                    <span id="tracker-val">Loading...</span> <span class="unit">Tonnes</span>
+                </div>
+                <div class="live-sub">Calculated via instantaneous trajectory mapping</div>
+            </section>
+
+            <section class="kpi-grid">
+                <div class="kpi-card glass-panel" id="card-co2">
+                    <div class="kpi-title">Annual Global Output</div>
+                    <div class="kpi-value"><span id="val-co2">--</span> Mt</div>
+                    <div class="kpi-trend bad" id="trend-co2">--</div>
+                </div>
+                <div class="kpi-card glass-panel" id="card-renew">
+                    <div class="kpi-title">Clean Energy Index</div>
+                    <div class="kpi-value"><span id="val-renew">--</span> %</div>
+                    <div class="kpi-trend good" id="trend-renew">--</div>
+                </div>
+                <div class="kpi-card glass-panel kpi-accent">
+                    <div class="kpi-title">Baseline Pathway (2035)</div>
+                    <div class="kpi-value"><span id="val-pred">--</span> Mt</div>
+                    <div class="kpi-trend" id="trend-pred">Algorithmic Forecast</div>
+                </div>
+            </section>
+
+            <!-- NEW: ENERGY MATRIX & DECOUPLING GRAPHS -->
+            <section class="charts-wrapper mb-4" id="decoupling">
+                <div class="chart-card glass-panel">
+                    <div class="card-header">
+                        <h3>Global Energy Matrix</h3>
+                        <p class="card-desc">Current systemic energy dependency (Fossil fuels vs Renewable ratio).</p>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                         <canvas id="energyMatrixChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card glass-panel">
+                    <div class="card-header">
+                        <h3>Economic Decoupling Index</h3>
+                        <p class="card-desc">Scatter mapping of GDP ($ Trillions) vs CO₂ Output (Mt).</p>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                         <canvas id="decouplingChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="map-wrapper mb-4" id="trace-maps">
+                <div class="charts-wrapper">
+                    <div class="chart-card glass-panel">
+                        <div class="card-header">
+                            <h3>Global Geospatial Trace</h3>
+                            <p class="card-desc">Mapping worldwide structural emission anomalies.</p>
+                        </div>
+                        <div id="globalMapObj" style="height: 350px; width: 100%; border-radius: 8px;"></div>
+                    </div>
+                    <div class="chart-card glass-panel">
+                        <div class="card-header">
+                            <h3>Diagnostic Regional Matrix: India</h3>
+                            <p class="card-desc">Localized severity tracing over the Indian Subcontinent.</p>
+                        </div>
+                        <div id="indiaMapObj" style="height: 350px; width: 100%; border-radius: 8px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="charts-wrapper" id="macro">
+                <div class="chart-card glass-panel span-full" id="chronological">
+                    <div class="card-header">
+                        <h3>Chronological Progression Mapping</h3>
+                        <p class="card-desc">Tracking global CO₂ metrics against renewable index expansion from 1990.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="historicalChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card glass-panel" id="predictions">
+                    <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <h3>Algorithmic Future Scenarios</h3>
+                            <p class="card-desc">Model projections factoring varied renewable transition speeds.</p>
+                        </div>
+                        <div class="scenario-toggles">
+                            <button class="btn toggle-btn active" data-scenario="baseline">Baseline</button>
+                            <button class="btn toggle-btn" data-scenario="optimistic">Optimistic</button>
+                            <button class="btn toggle-btn" data-scenario="pessimistic">Pessimistic</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="predictionChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="chart-card glass-panel" id="diagnostic">
+                    <div class="card-header">
+                        <h3>Diagnostic Feature Correlation</h3>
+                        <p class="card-desc">Algorithmic load weights determining total global emissions vector.</p>
+                    </div>
+                    <div class="chart-container">
+                         <canvas id="edaChart"></canvas>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

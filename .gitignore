@@ -1,0 +1,19 @@
+# SSL certificates (sensitive)
+cert.pem
+key.pem
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/

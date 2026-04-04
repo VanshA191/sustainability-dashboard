@@ -1,0 +1,17 @@
+{
+    "correlations": {
+        "Year": 0.8916763565579015,
+        "Population_Billions": 0.8998464826965669,
+        "GDP_Trillions": 0.903286144464598,
+        "Renewable_Energy_Share": 0.8175140147199759
+    },
+    "yoy_co2_change_percent": -1.5704290698827013,
+    "yoy_renewable_change_points": 1.1755322197133538,
+    "current_co2": 29561.397984749543,
+    "current_renewable": 36.007324737665385,
+    "feature_importances": {
+        "Population_Billions": 0.37045443627304836,
+        "GDP_Trillions": 0.3215327546332084,
+        "Renewable_Energy_Share": 0.30801280909374323
+    }
+}
