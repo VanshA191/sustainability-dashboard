@@ -343,6 +343,14 @@ body {
     font-size: 0.85rem;
 }
 
+#energy-matrix-header h3 {
+    color: var(--primary-teal);
+}
+#energy-matrix-header .card-desc {
+    color: var(--primary-teal);
+    opacity: 0.8;
+}
+
 .scenario-toggles {
     display: flex;
     gap: 0.5rem;
