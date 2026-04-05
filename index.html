@@ -31,7 +31,9 @@
     
     <link rel="stylesheet" href="style.css?v=1.2">
     
-    <!-- Chart.js and Leaflet JS -->
+    <!-- Icon Library: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -45,12 +47,14 @@
             <div class="brand-subtitle">Global Analytics</div>
             
             <ul class="nav-links mt-4">
-                <li class="active"><a href="#">Executive Summary</a></li>
-                <li><a href="#decoupling">Economic Decoupling</a></li>
-                <li><a href="#trace-maps">Geospatial Tracing</a></li>
-                <li><a href="#chronological">Chronological Progression Mapping</a></li>
-                <li><a href="#predictions">Algorithmic Future Scenarios</a></li>
-                <li><a href="#diagnostic">Diagnostic Feature Correlation</a></li>
+                <li class="active"><a href="#"><i class="fas fa-home"></i> Executive Summary</a></li>
+                <li><a href="#decoupling"><i class="fas fa-chart-line"></i> Economic Decoupling</a></li>
+                <li><a href="#advanced-analytics"><i class="fas fa-bolt"></i> Carbon Intensity</a></li>
+                <li><a href="#demographics"><i class="fas fa-users"></i> Demographic Correlation</a></li>
+                <li><a href="#trace-maps"><i class="fas fa-map-location-dot"></i> Geospatial Tracing</a></li>
+                <li><a href="#chronological"><i class="fas fa-history"></i> Chronological Progression</a></li>
+                <li><a href="#predictions"><i class="fas fa-crystal-ball"></i> Future Scenarios</a></li>
+                <li><a href="#diagnostic"><i class="fas fa-microscope"></i> Feature Intelligence</a></li>
             </ul>
             <button id="btn-simulate" class="btn primary-btn mt-auto" style="margin-bottom: 10px;">⚡ Run Simulation</button>
         </nav>
@@ -108,6 +112,43 @@
                     </div>
                     <div class="chart-container" style="height: 300px;">
                          <canvas id="decouplingChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: ADVANCED INTELLIGENCE HUB -->
+            <section class="charts-wrapper mb-4" id="advanced-analytics">
+                <div class="chart-card glass-panel span-full">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h3>Carbon Intensity Index (Mt / $1T GDP)</h3>
+                            <div class="info-badge"><i class="fas fa-lightbulb"></i> Efficiency Logic</div>
+                        </div>
+                        <p class="card-desc">Measuring the decoupling of economic growth from absolute emissions.</p>
+                    </div>
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="intensityChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <section class="charts-wrapper mb-4" id="demographics">
+                <div class="chart-card glass-panel">
+                    <div class="card-header">
+                        <h3>Demographic Impact Matrix</h3>
+                        <p class="card-desc">Tracking population growth against total global CO₂ output.</p>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="populationChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card glass-panel">
+                    <div class="card-header">
+                        <h3>AI Feature Importance</h3>
+                        <p class="card-desc">Weights assigned to key drivers by the generative climate model.</p>
+                    </div>
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="importanceChart"></canvas>
                     </div>
                 </div>
             </section>

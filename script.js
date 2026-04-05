@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         initCharts();
         initMap();
         initInteractions();
+        initNavigation();
 
     } catch (err) {
         console.error("Error loading data:", err);
@@ -218,6 +219,95 @@ function initCharts() {
     });
 
 
+    // --- NEW GRAPH 3: Carbon Intensity Index ---
+    const ctxIntensity = document.getElementById('intensityChart').getContext('2d');
+    const intensityData = historicalData.map(d => d.CO2_Emissions_Mt / d.GDP_Trillions);
+    
+    new Chart(ctxIntensity, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [{
+                label: 'Carbon Intensity (Mt / $1T GDP)',
+                data: intensityData,
+                borderColor: COLORS.primary,
+                backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                tension: 0.4,
+                fill: true,
+                borderWidth: 2,
+                pointRadius: 3,
+                pointHoverRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { title: { display: true, text: 'Intensity Index' } }
+            }
+        }
+    });
+
+    // --- NEW GRAPH 4: Demographic Impact Matrix ---
+    const ctxPop = document.getElementById('populationChart').getContext('2d');
+    const popData = historicalData.map(d => d.Population_Billions);
+    
+    new Chart(ctxPop, {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Global Population (B)',
+                    data: popData,
+                    borderColor: COLORS.secondary,
+                    yAxisID: 'yPop',
+                    tension: 0.4,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Global CO₂ (Mt)',
+                    data: co2,
+                    borderColor: COLORS.primary,
+                    yAxisID: 'yCO2',
+                    tension: 0.4,
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yPop: { type: 'linear', display: true, position: 'left', title: {display: true, text: 'Population (Billions)'} },
+                yCO2: { type: 'linear', display: true, position: 'right', grid: {drawOnChartArea: false}, title: {display: true, text: 'Emissions (Mt)'} },
+            }
+        }
+    });
+
+    // --- NEW GRAPH 5: AI Feature Importance (Horizontal) ---
+    const ctxImp = document.getElementById('importanceChart').getContext('2d');
+    const impLabels = Object.keys(edaData.feature_importances).map(l => l.replace(/_/g, ' '));
+    const impValues = Object.values(edaData.feature_importances).map(v => v * 100);
+
+    new Chart(ctxImp, {
+        type: 'bar',
+        data: {
+            labels: impLabels,
+            datasets: [{
+                data: impValues,
+                backgroundColor: [COLORS.primary, COLORS.accent, COLORS.secondary],
+                borderRadius: 5
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+        }
+    });
+
     // --- EXIST 1: Chronological Chart ---
     const ctxHist = document.getElementById('historicalChart').getContext('2d');
     new Chart(ctxHist, {
@@ -228,20 +318,11 @@ function initCharts() {
                 {
                     label: 'CO₂ Output Variance (Mt)',
                     data: co2,
-                    borderColor: COLORS.accent, // Burnt Orange
-                    backgroundColor: 'rgba(234, 88, 12, 0.1)',
+                    borderColor: COLORS.accent,
+                    backgroundColor: 'rgba(94, 234, 212, 0.1)',
                     yAxisID: 'y',
                     tension: 0.4,
                     fill: true,
-                    borderWidth: 2,
-                    pointRadius: 0
-                },
-                {
-                    label: 'Clean Energy Transition (%)',
-                    data: renew,
-                    borderColor: COLORS.primary, // Deep Blue
-                    yAxisID: 'y1',
-                    tension: 0.4,
                     borderWidth: 2,
                     pointRadius: 0
                 }
@@ -252,25 +333,21 @@ function initCharts() {
             maintainAspectRatio: false,
             interaction: { mode: 'index', intersect: false },
             scales: {
-                y: { type: 'linear', display: true, position: 'left', title: {display: true, text: 'Valuation (Mt)'} },
-                y1: { type: 'linear', display: true, position: 'right', grid: {drawOnChartArea: false}, title: {display: true, text: 'Index (%)'} },
+                y: { type: 'linear', display: true, position: 'left', title: {display: true, text: 'Valuation (Mt)'} }
             }
         }
     });
 
-    // --- EXIST 2: Diagnostic Chart ---
+    // --- EXIST 2: Diagnostic (EDA) Chart ---
     const ctxEda = document.getElementById('edaChart').getContext('2d');
-    const feats = Object.keys(edaData.feature_importances).map(f => f.replace('_', ' '));
-    const importances = Object.values(edaData.feature_importances).map(v => v * 100);
-
     new Chart(ctxEda, {
         type: 'bar',
         data: {
-            labels: feats,
+            labels: impLabels,
             datasets: [{
                 label: 'Relative Diagnostic Weight (%)',
-                data: importances,
-                backgroundColor: COLORS.secondary, // Slate Gray
+                data: impValues,
+                backgroundColor: COLORS.secondary,
                 borderRadius: 2
             }]
         },
@@ -282,7 +359,7 @@ function initCharts() {
         }
     });
 
-    // --- EXIST 3: Projections Chart ---
+    // --- EXIST 3: Projections ---
     renderPredictionChart('baseline');
 }
 
@@ -395,22 +472,51 @@ function triggerSimulation() {
     }
 
     // Animate Doughnut Chart dynamically
-    const ctxDoughnut = Chart.getChart('energyMatrixChart');
-    if(ctxDoughnut && ctxDoughnut.data.datasets.length > 0) {
-        let currentRenew = ctxDoughnut.data.datasets[0].data[0];
-        let leap = Math.random() * 3; // Jump renewables randomly
-        currentRenew = Math.min(100, currentRenew + leap);
-        ctxDoughnut.data.datasets[0].data[0] = currentRenew;
-        ctxDoughnut.data.datasets[0].data[1] = 100 - currentRenew;
-        ctxDoughnut.update();
-        
-        // Update KPI text dynamically
-        const valRenew = document.getElementById('val-renew');
-        const trendRenew = document.getElementById('trend-renew');
-        if(valRenew && trendRenew) {
-            valRenew.innerText = currentRenew.toFixed(1);
-            trendRenew.innerText = `+${leap.toFixed(2)} pts simulated`;
-            trendRenew.className = 'kpi-trend good';
-        }
-    }
+    const chartsToUpdate = ['energyMatrixChart', 'intensityChart', 'populationChart'];
+    chartsToUpdate.forEach(id => {
+        const chart = Chart.getChart(id);
+        if(chart) chart.update();
+    });
+}
+
+function initNavigation() {
+    // 1. Smooth Scrolling for Sidebar Links
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href');
+            if (targetId.startsWith('#')) {
+                e.preventDefault();
+                const targetElem = document.querySelector(targetId);
+                if (targetElem) {
+                    targetElem.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // 2. Scroll-Spy Integration (Intersection Observer)
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-links li');
+
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -20% 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.querySelector(`a[href="#${id}"]`)) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
 }
