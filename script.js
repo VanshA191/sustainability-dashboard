@@ -1,22 +1,23 @@
-// Chart.js Default Configurations for Corporate Mode
-Chart.defaults.color = '#94A3B8';
+// Chart.js Default Configurations for Light Mode
+Chart.defaults.color = '#4B5563'; // Gray 600
 Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
-Chart.defaults.plugins.tooltip.backgroundColor = '#1E293B';
-Chart.defaults.plugins.tooltip.titleColor = '#FFF';
+Chart.defaults.scale.grid.color = 'rgba(0, 0, 0, 0.05)';
+Chart.defaults.plugins.tooltip.backgroundColor = '#FFFFFF';
+Chart.defaults.plugins.tooltip.titleColor = '#111827';
+Chart.defaults.plugins.tooltip.bodyColor = '#374151';
 Chart.defaults.plugins.tooltip.padding = 10;
-Chart.defaults.plugins.tooltip.borderColor = 'rgba(248, 250, 252, 0.1)';
+Chart.defaults.plugins.tooltip.borderColor = '#E5E7EB';
 Chart.defaults.plugins.tooltip.borderWidth = 1;
 
 let historicalData, predictionsData, edaData;
 let predictionChartInstance;
 
-// Corporate Color Palette
+// Modern Teal Color Palette
 const COLORS = {
-    primary: '#1E3A8A',    // Deep Blue
-    secondary: '#475569',  // Slate Gray
-    accent: '#EA580C',     // Burnt Orange
-    danger: '#EF4444',
+    primary: '#0D9488',    // Teal 600
+    secondary: '#64748B',  // Slate 500
+    accent: '#2DD4BF',     // Teal 400
+    danger: '#DC2626',
     warning: '#F59E0B'
 };
 
@@ -98,7 +99,7 @@ function initLiveTracker() {
 function initMap() {
     // 1. Global Metrics Map
     const globalMap = L.map('globalMapObj').setView([20, 0], 1);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 20
     }).addTo(globalMap);
 
@@ -117,7 +118,7 @@ function initMap() {
 
     // 2. India Subcontinent Specific Map
     const indiaMap = L.map('indiaMapObj').setView([22.5937, 78.9629], 4);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 20
     }).addTo(indiaMap);
 
@@ -156,8 +157,8 @@ function initCharts() {
             labels: ['Renewable Infrastructure', 'Fossil Asset Base'],
             datasets: [{
                 data: [currentRenewableStr, currentFossilStr],
-                backgroundColor: [COLORS.primary, '#334155'], // Blue and Slate
-                hoverBackgroundColor: [COLORS.accent, '#475569'],
+                backgroundColor: [COLORS.primary, '#E5E7EB'], // Teal and Light Gray
+                hoverBackgroundColor: [COLORS.accent, '#D1D5DB'],
                 borderWidth: 0,
             }]
         },
@@ -199,8 +200,8 @@ function initCharts() {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                x: { title: { display: true, text: 'Global GDP ($ Trillions)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                y: { title: { display: true, text: 'CO₂ Output (Mt)' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                x: { title: { display: true, text: 'Global GDP ($ Trillions)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
+                y: { title: { display: true, text: 'CO₂ Output (Mt)' }, grid: { color: 'rgba(0,0,0,0.05)' } }
             },
             plugins: {
                 tooltip: {
@@ -316,7 +317,7 @@ function renderPredictionChart(scenario) {
                 {
                     label: 'Historical Chronolog',
                     data: comboHistorical,
-                    borderColor: 'rgba(255,255,255,0.3)',
+                    borderColor: 'rgba(0,0,0,0.1)',
                     tension: 0.4,
                     borderWidth: 2,
                 },
@@ -377,9 +378,9 @@ function triggerSimulation() {
     const tracker = document.querySelector('.live-tracker');
     if(tracker) {
         tracker.style.borderColor = COLORS.danger;
-        tracker.style.boxShadow = `0 0 20px ${COLORS.danger}`;
+        tracker.style.boxShadow = `0 0 20px rgba(220, 38, 38, 0.2)`;
         setTimeout(() => {
-            tracker.style.borderColor = COLORS.accent;
+            tracker.style.borderColor = COLORS.primary;
             tracker.style.boxShadow = 'none';
         }, 600);
     }

@@ -1,23 +1,23 @@
 :root {
-    /* Color Palette - Vanguard Corporate */
-    --bg-base: #0F172A; /* Slate 900 */
-    --bg-surface: #1E293B; /* Slate 800 */
-    --bg-panel: #334155; /* Slate 700 */
+    /* Color Palette - Fresh Arctic Teal (Light Mode) */
+    --bg-base: #F9FAFB; /* Gray 50 */
+    --bg-surface: #FFFFFF; /* Pure White */
+    --bg-panel: #F3F4F6; /* Gray 100 */
     
-    --primary-blue: #1E3A8A; /* Blue 900 */
-    --accent-orange: #EA580C; /* Burnt Orange */
+    --primary-teal: #0D9488; /* Teal 600 */
+    --accent-teal: #2DD4BF; /* Teal 400 */
     
-    --text-main: #F8FAFC;
-    --text-muted: #94A3B8;
+    --text-main: #111827; /* Gray 900 */
+    --text-muted: #4B5563; /* Gray 600 */
     
-    --success: #10B981;
-    --danger: #EF4444;
+    --success: #059669; /* Emerald 600 */
+    --danger: #DC2626; /* Red 600 */
     
-    --border-light: rgba(248, 250, 252, 0.1);
-    --border-highlight: rgba(234, 88, 12, 0.4);
+    --border-light: #E5E7EB; /* Gray 200 */
+    --border-highlight: rgba(13, 148, 136, 0.2);
     
-    --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    --shadow-accent: 0 0 15px rgba(234, 88, 12, 0.3);
+    --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-accent: 0 4px 6px -1px rgba(13, 148, 136, 0.1);
 
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -28,7 +28,7 @@
     padding: 0;
     box-sizing: border-box;
     scrollbar-width: thin;
-    scrollbar-color: var(--primary-blue) var(--bg-base);
+    scrollbar-color: var(--primary-teal) var(--bg-base);
 }
 
 body {
@@ -40,10 +40,10 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    /* Clean corporate grid background instead of radial nature gradients */
+    /* Clean light grid background */
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 30px 30px;
 }
 
@@ -70,14 +70,14 @@ body {
 }
 
 .primary-btn {
-    background: var(--accent-orange);
+    background: var(--primary-teal);
     color: #fff;
     padding: 0.8rem 1.2rem;
-    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.2);
+    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
 }
 .primary-btn:hover {
-    background: #C2410C;
-    box-shadow: 0 6px 15px rgba(234, 88, 12, 0.4);
+    background: #0F766E;
+    box-shadow: 0 6px 15px rgba(13, 148, 136, 0.3);
     transform: translateY(-1px);
 }
 
@@ -92,8 +92,8 @@ body {
     background: #475569;
 }
 .toggle-btn.active {
-    background: var(--primary-blue);
-    border-color: var(--primary-blue);
+    background: var(--primary-teal);
+    border-color: var(--primary-teal);
     color: #fff;
 }
 
@@ -121,7 +121,8 @@ body {
     border-top: none;
     border-bottom: none;
     border-left: none;
-    background: #0B1121; /* Slightly darker than base for depth */
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border-light);
 }
 
 .brand {
@@ -137,7 +138,7 @@ body {
     font-weight: 700;
     font-size: 1.5rem;
     letter-spacing: -0.5px;
-    color: #fff;
+    color: var(--text-main);
     text-transform: uppercase;
 }
 
@@ -174,9 +175,9 @@ body {
 }
 
 .nav-links li.active a {
-    border-left: 3px solid var(--primary-blue);
+    border-left: 3px solid var(--primary-teal);
     padding-left: calc(1rem - 3px);
-    background: rgba(30, 58, 138, 0.4);
+    background: rgba(13, 148, 136, 0.1);
 }
 
 /* Main Content */
@@ -214,14 +215,14 @@ body {
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
-    border-top: 3px solid var(--accent-orange);
-    background: linear-gradient(180deg, rgba(234, 88, 12, 0.05) 0%, var(--bg-surface) 100%);
+    border-top: 3px solid var(--primary-teal);
+    background: linear-gradient(180deg, rgba(13, 148, 136, 0.05) 0%, var(--bg-surface) 100%);
 }
 
 .live-header {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--accent-orange);
+    color: var(--primary-teal);
     text-transform: uppercase;
     display: flex;
     align-items: center;
@@ -233,7 +234,7 @@ body {
 .live-dot {
     width: 8px; height: 8px;
     border-radius: 50%;
-    background-color: var(--accent-orange);
+    background-color: var(--primary-teal);
     animation: blink 1s infinite alternate;
 }
 
@@ -246,7 +247,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 2.8rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-main);
     line-height: 1;
 }
 
@@ -279,8 +280,8 @@ body {
 }
 
 .kpi-accent {
-    border: 1px solid var(--primary-blue);
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.2), var(--bg-surface));
+    border: 1px solid var(--primary-teal);
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.05), var(--bg-surface));
 }
 
 .kpi-title {
@@ -353,14 +354,14 @@ body {
     width: 100%;
 }
 
-/* Leaflet Overrides for Corporate Dark */
+/* Leaflet Overrides for Light Mode */
 .leaflet-container {
-    background: #020617; /* Very dark slate */
+    background: var(--bg-panel) !important;
     font-family: var(--font-body) !important;
 }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: var(--bg-surface) !important;
-    color: #fff !important;
+    color: var(--text-main) !important;
     border: 1px solid var(--border-light);
     border-radius: 4px;
 }
