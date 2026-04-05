@@ -1,23 +1,23 @@
 :root {
-    /* Color Palette - Fresh Arctic Teal (Light Mode) */
-    --bg-base: #F9FAFB; /* Gray 50 */
-    --bg-surface: #FFFFFF; /* Pure White */
-    --bg-panel: #F3F4F6; /* Gray 100 */
+    /* Color Palette - Modern Dim / Graphite & Teal (Light Dark) */
+    --bg-base: #111827; /* Gray 900 (Graphite) */
+    --bg-surface: #1F2937; /* Gray 800 (Rich Slate) */
+    --bg-panel: #374151; /* Gray 700 */
     
-    --primary-teal: #0D9488; /* Teal 600 */
-    --accent-teal: #2DD4BF; /* Teal 400 */
+    --primary-teal: #14B8A6; /* Teal 500 (Cyber Teal) */
+    --accent-teal: #5EEAD4; /* Teal 300 */
     
-    --text-main: #111827; /* Gray 900 */
-    --text-muted: #4B5563; /* Gray 600 */
+    --text-main: #F9FAFB; /* Gray 50 (Pearl White) */
+    --text-muted: #9CA3AF; /* Gray 400 (Muted Silver) */
     
-    --success: #059669; /* Emerald 600 */
-    --danger: #DC2626; /* Red 600 */
+    --success: #10B981; /* Emerald 500 */
+    --danger: #EF4444; /* Red 500 */
     
-    --border-light: #E5E7EB; /* Gray 200 */
-    --border-highlight: rgba(13, 148, 136, 0.2);
+    --border-light: rgba(249, 250, 251, 0.1); /* Subtle light border */
+    --border-highlight: rgba(20, 184, 166, 0.4);
     
-    --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-accent: 0 4px 6px -1px rgba(13, 148, 136, 0.1);
+    --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    --shadow-accent: 0 0 15px rgba(20, 184, 166, 0.2);
 
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -40,10 +40,10 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    /* Clean light grid background */
+    /* Subtle dark grid background */
     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 30px 30px;
 }
 
@@ -73,11 +73,11 @@ body {
     background: var(--primary-teal);
     color: #fff;
     padding: 0.8rem 1.2rem;
-    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2);
+    box-shadow: 0 4px 10px rgba(20, 184, 166, 0.2);
 }
 .primary-btn:hover {
-    background: #0F766E;
-    box-shadow: 0 6px 15px rgba(13, 148, 136, 0.3);
+    background: #0D9488;
+    box-shadow: 0 6px 15px rgba(20, 184, 166, 0.4);
     transform: translateY(-1px);
 }
 
@@ -121,7 +121,7 @@ body {
     border-top: none;
     border-bottom: none;
     border-left: none;
-    background: var(--bg-surface);
+    background: #0B1121; /* Slightly darker than base for depth */
     border-right: 1px solid var(--border-light);
 }
 
@@ -177,7 +177,7 @@ body {
 .nav-links li.active a {
     border-left: 3px solid var(--primary-teal);
     padding-left: calc(1rem - 3px);
-    background: rgba(13, 148, 136, 0.1);
+    background: rgba(20, 184, 166, 0.1);
 }
 
 /* Main Content */
@@ -216,7 +216,7 @@ body {
     justify-content: center;
     padding: 1.5rem;
     border-top: 3px solid var(--primary-teal);
-    background: linear-gradient(180deg, rgba(13, 148, 136, 0.05) 0%, var(--bg-surface) 100%);
+    background: linear-gradient(180deg, rgba(20, 184, 166, 0.05) 0%, var(--bg-surface) 100%);
 }
 
 .live-header {
@@ -281,7 +281,7 @@ body {
 
 .kpi-accent {
     border: 1px solid var(--primary-teal);
-    background: linear-gradient(135deg, rgba(13, 148, 136, 0.05), var(--bg-surface));
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), var(--bg-surface));
 }
 
 .kpi-title {
@@ -362,9 +362,9 @@ body {
     width: 100%;
 }
 
-/* Leaflet Overrides for Light Mode */
+/* Leaflet Overrides for Modern Dim */
 .leaflet-container {
-    background: var(--bg-panel) !important;
+    background: #020617 !important;
     font-family: var(--font-body) !important;
 }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {

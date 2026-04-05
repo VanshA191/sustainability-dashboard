@@ -1,23 +1,23 @@
-// Chart.js Default Configurations for Light Mode
-Chart.defaults.color = '#4B5563'; // Gray 600
+// Chart.js Default Configurations for Dim Mode
+Chart.defaults.color = '#9CA3AF'; // Muted Silver
 Chart.defaults.font.family = "'Inter', sans-serif";
-Chart.defaults.scale.grid.color = 'rgba(0, 0, 0, 0.05)';
-Chart.defaults.plugins.tooltip.backgroundColor = '#FFFFFF';
-Chart.defaults.plugins.tooltip.titleColor = '#111827';
-Chart.defaults.plugins.tooltip.bodyColor = '#374151';
+Chart.defaults.scale.grid.color = 'rgba(255, 255, 255, 0.05)';
+Chart.defaults.plugins.tooltip.backgroundColor = '#1F2937';
+Chart.defaults.plugins.tooltip.titleColor = '#F9FAFB';
+Chart.defaults.plugins.tooltip.bodyColor = '#D1D5DB';
 Chart.defaults.plugins.tooltip.padding = 10;
-Chart.defaults.plugins.tooltip.borderColor = '#E5E7EB';
+Chart.defaults.plugins.tooltip.borderColor = 'rgba(255, 255, 255, 0.1)';
 Chart.defaults.plugins.tooltip.borderWidth = 1;
 
 let historicalData, predictionsData, edaData;
 let predictionChartInstance;
 
-// Modern Teal Color Palette
+// Cyber Teal Color Palette
 const COLORS = {
-    primary: '#0D9488',    // Teal 600
-    secondary: '#64748B',  // Slate 500
-    accent: '#2DD4BF',     // Teal 400
-    danger: '#DC2626',
+    primary: '#14B8A6',    // Teal 500
+    secondary: '#475569',  // Slate 600
+    accent: '#5EEAD4',     // Teal 300
+    danger: '#EF4444',
     warning: '#F59E0B'
 };
 
@@ -99,7 +99,7 @@ function initLiveTracker() {
 function initMap() {
     // 1. Global Metrics Map
     const globalMap = L.map('globalMapObj').setView([20, 0], 1);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 20
     }).addTo(globalMap);
 
@@ -118,7 +118,7 @@ function initMap() {
 
     // 2. India Subcontinent Specific Map
     const indiaMap = L.map('indiaMapObj').setView([22.5937, 78.9629], 4);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; CARTO', subdomains: 'abcd', maxZoom: 20
     }).addTo(indiaMap);
 
@@ -157,7 +157,7 @@ function initCharts() {
             labels: ['Renewable Infrastructure', 'Fossil Asset Base'],
             datasets: [{
                 data: [currentRenewableStr, currentFossilStr],
-                backgroundColor: [COLORS.primary, '#E5E7EB'], // Teal and Light Gray
+                backgroundColor: [COLORS.primary, '#374151'], // Teal and Slate
                 hoverBackgroundColor: [COLORS.accent, '#D1D5DB'],
                 borderWidth: 0,
             }]
@@ -167,7 +167,7 @@ function initCharts() {
             maintainAspectRatio: false,
             cutout: '75%',
             plugins: {
-                legend: { position: 'bottom', labels: { color: '#4B5563' } }
+                legend: { position: 'bottom', labels: { color: '#9CA3AF' } }
             }
         }
     });
@@ -200,8 +200,8 @@ function initCharts() {
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                x: { title: { display: true, text: 'Global GDP ($ Trillions)' }, grid: { color: 'rgba(0,0,0,0.05)' } },
-                y: { title: { display: true, text: 'CO₂ Output (Mt)' }, grid: { color: 'rgba(0,0,0,0.05)' } }
+                x: { title: { display: true, text: 'Global GDP ($ Trillions)' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                y: { title: { display: true, text: 'CO₂ Output (Mt)' }, grid: { color: 'rgba(255,255,255,0.05)' } }
             },
             plugins: {
                 tooltip: {
@@ -317,7 +317,7 @@ function renderPredictionChart(scenario) {
                 {
                     label: 'Historical Chronolog',
                     data: comboHistorical,
-                    borderColor: 'rgba(0,0,0,0.1)',
+                    borderColor: 'rgba(255,255,255,0.1)',
                     tension: 0.4,
                     borderWidth: 2,
                 },
