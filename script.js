@@ -167,7 +167,7 @@ function initCharts() {
             maintainAspectRatio: false,
             cutout: '75%',
             plugins: {
-                legend: { position: 'bottom', labels: { color: '#F8FAFC' } }
+                legend: { position: 'bottom', labels: { color: '#4B5563' } }
             }
         }
     });
